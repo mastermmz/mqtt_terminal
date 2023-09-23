@@ -1,0 +1,1 @@
+List<String> mqttTopicVersionList = ["QoS 0" , "QoS 1" , "QoS 2"];

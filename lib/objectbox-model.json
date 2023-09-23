@@ -1,0 +1,107 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:6957062273107783833",
+      "lastPropertyId": "16:1862868516227419248",
+      "name": "MqttBrokerData",
+      "properties": [
+        {
+          "id": "1:7709794822573441842",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:2583300188299802886",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "3:6538968308219444358",
+          "name": "iconPath",
+          "type": 6
+        },
+        {
+          "id": "4:7819383445043383346",
+          "name": "clientId",
+          "type": 9
+        },
+        {
+          "id": "5:6113937746553945604",
+          "name": "host",
+          "type": 9
+        },
+        {
+          "id": "6:2763089878887892111",
+          "name": "hostType",
+          "type": 9
+        },
+        {
+          "id": "7:7083622977173645919",
+          "name": "port",
+          "type": 6
+        },
+        {
+          "id": "8:2654848864915159848",
+          "name": "username",
+          "type": 9
+        },
+        {
+          "id": "9:1620239181081807170",
+          "name": "password",
+          "type": 9
+        },
+        {
+          "id": "10:2006892253586629759",
+          "name": "mqttVersion",
+          "type": 6
+        },
+        {
+          "id": "11:6529546360971547301",
+          "name": "keepAlive",
+          "type": 9
+        },
+        {
+          "id": "12:3577514373035889779",
+          "name": "autoReconnect",
+          "type": 1
+        },
+        {
+          "id": "13:3504464729807485269",
+          "name": "secure",
+          "type": 1
+        },
+        {
+          "id": "14:7976323242031362347",
+          "name": "websocket",
+          "type": 1
+        },
+        {
+          "id": "15:3813906004235087896",
+          "name": "topic",
+          "type": 30
+        },
+        {
+          "id": "16:1862868516227419248",
+          "name": "topicVersion",
+          "type": 30
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "1:6957062273107783833",
+  "lastIndexId": "0:0",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}
