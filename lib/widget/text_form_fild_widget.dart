@@ -4,7 +4,7 @@ Color fildColors = const Color(0xffdfdfdf);
 Color colorFildText =  const Color(0xff000000);
 
 
-Widget textFildWidget({
+Widget textForFildWidget({
   bool showPassword = false,
   int? maxChar,
   TextInputType textInputType = TextInputType.name,
@@ -15,11 +15,13 @@ Widget textFildWidget({
   double inputMargin = 5.0,
   double inputPaddingL = 15.0,
   double inputPaddingR = 15.0,
+  String? Function(String?)? validator,
 }){
   return Container(
     margin: EdgeInsets.symmetric(vertical: inputMargin),
     padding: EdgeInsets.only(left: inputPaddingL , right: inputPaddingR),
-    child: TextField(
+    child: TextFormField(
+      validator: validator,
 
       obscureText: showPassword,
       maxLength: maxChar,

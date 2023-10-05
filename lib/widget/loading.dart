@@ -24,7 +24,7 @@ class _LoadingWidgetState extends State<LoadingWidget> {
         alignment: Alignment.center,
         //padding: EdgeInsets.symmetric(horizontal: 70.0 ,vertical: 20.0),
         child:  const SpinKitRing(
-          color: Colors.white,
+          color: Color(0x4B165CF4),
           size: 100.0,
           lineWidth: 10.0,
         ),
