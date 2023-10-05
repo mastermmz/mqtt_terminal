@@ -1,6 +1,7 @@
 import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import '../dataBase/data_model.dart';
 import '../services/mqtt_connect.dart';
 import '../widget/drop_down_model.dart';
@@ -112,7 +113,14 @@ class _BrokerMassegMannegerState extends State<BrokerMassegManneger> {
               itemBuilder:(BuildContext context, int index){
                 SubscribMassegClass subscribMassegData = subscribMassegList[index];
                 printer(subscribMassegData);
-                return subscribMasseg(subscribMassegData ,context);
+                return GestureDetector(
+                    onLongPress: () async {
+                      await Clipboard.setData(ClipboardData(text: "${subscribMassegData.topic!} : \n${subscribMassegData.masseg!}"));
+                      setState(() {
+
+                      });
+                    },
+                      child: subscribMasseg(subscribMassegData ,context));
               }
           ),
         ),
