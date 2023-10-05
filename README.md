@@ -1,16 +1,26 @@
-# mqtt_terminal
+# MQTT Terminal
 
-A new Flutter project.
+پروژه MQTT Terminal یک برنامه ساده و کاربردی برای اتصال به سرورهای MQTT و انجام عملیات Publish و Subscribe بر روی تاپیک‌های مختلف است. این برنامه به کاربران این امکان را می‌دهد تا با استفاده از تلفن همراه خود به سرورهای MQTT متصل شوند و اطلاعات را به اشتراک بگذارند یا اطلاعات را دریافت کنند.
 
-## Getting Started
+## ویژگی‌ها
 
-This project is a starting point for a Flutter application.
+- اتصال به سرورهای MQTT
+- عملیات Publish و Subscribe به تاپیک‌های مختلف
+- پشتیبانی از تنظیمات اتصال امن (SSL/TLS)
+- رابط کاربری ساده و کارآمد
+- نمایش پیغام‌های ورودی و خروجی
+- پشتیبانی از انواع پیام‌های MQTT (QoS levels)
 
-A few resources to get you started if this is your first Flutter project:
+## نصب
+میتوانید اخرین نسخه برنامه را از بخش releass دریافت نمایید یا پس از کلون کردن پروژه ان را برای خود بیلد کنید
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## مشارکت
+
+ما از مشارکت شما در توسعه این پروژه استقبال می‌کنیم. اگر مشکلات یا پیشنهاداتی دارید، لطفا از بخش "Issues" در صفحه GitHub پروژه ما گزارش دهید. همچنین می‌توانید با fork کردن پروژه و ارسال Pull Request به ما کمک کنید.
+
+
+## تماس
+
+برای ارتباط با توسعه دهندگان پروژه، لطفا به آدرس ایمیل mm2041772@Gmail.com مراجعه کنید یا ما را در شبکه‌های اجتماعی دنبال کنید.
+```
