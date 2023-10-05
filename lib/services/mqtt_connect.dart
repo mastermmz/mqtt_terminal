@@ -30,6 +30,7 @@ class MqttBroker{
     clientMqtt.port = mqttBrokerData!.port;
     clientMqtt.secure = mqttBrokerData!.secure;
     clientMqtt.autoReconnect = mqttBrokerData!.autoReconnect;
+    clientMqtt.useWebSocket = mqttBrokerData!.websocket;
     clientMqtt.keepAlivePeriod = int.parse(mqttBrokerData!.keepAlive);
     if(mqttBrokerData!.mqttVersion == 0){
       clientMqtt.setProtocolV31();
