@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 import 'mqtt_version.dart';
@@ -45,25 +46,20 @@ Widget subscribMasseg(SubscribMassegClass subscribMasseg , context){
       crossAxisAlignment: subscribMasseg.send == true? CrossAxisAlignment.end:CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          mainAxisAlignment: subscribMasseg.send == true? MainAxisAlignment.end:MainAxisAlignment.start,
-          children: subscribMasseg.send == false?[
-            Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: Text(subscribMasseg.topic! , style: const TextStyle(fontSize: 15.0 , fontWeight: FontWeight.w700) , textAlign: TextAlign.left)),
-            Container(
-                padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                child: Text(mqttTopicVersionList[subscribMasseg.topicsVersion!] , style: const TextStyle(fontSize: 10.0 , fontWeight: FontWeight.w400) , textAlign: TextAlign.left)),
-          ]:[
-            Container(
-                padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                child: Text(mqttTopicVersionList[subscribMasseg.topicsVersion!] , style: const TextStyle(fontSize: 10.0 , fontWeight: FontWeight.w400) , textAlign: TextAlign.left)),
-            Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: Text(subscribMasseg.topic! , style: const TextStyle(fontSize: 15.0 , fontWeight: FontWeight.w700) , textAlign: TextAlign.left)),
-          ],
+        Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            child: AutoSizeText(
+                subscribMasseg.topic! ,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+                style: const TextStyle(
+                    fontWeight: FontWeight.w700) ,
+                textAlign: TextAlign.left)
         ),
+        Container(
+            alignment: subscribMasseg.send == true?Alignment.centerLeft: Alignment.centerRight,
+            padding: const EdgeInsets.symmetric(horizontal: 5.0),
+            child: Text(mqttTopicVersionList[subscribMasseg.topicsVersion!] , style: const TextStyle(fontSize: 10.0 , fontWeight: FontWeight.w400) , textAlign: TextAlign.left)),
         Container(
           // alignment: Alignment.centerRight,
           padding:  const EdgeInsets.symmetric(horizontal: 30 , vertical: 10.0),
@@ -82,6 +78,7 @@ Widget subscribMasseg(SubscribMassegClass subscribMasseg , context){
             ,
           )
         ),
+
       ],
     ),
   );

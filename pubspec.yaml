@@ -25,6 +25,7 @@ dependencies:
   glassmorphism_ui: ^0.3.0
   flutter_spinkit: ^5.2.0
   flutter_boxicons: ^3.0.0
+  auto_size_text: ^3.0.0
 
 dev_dependencies:
   flutter_test:
