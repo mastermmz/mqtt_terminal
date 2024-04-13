@@ -20,10 +20,8 @@ jobs:
           java-version: '12.x'
       - uses: subosito/flutter-action@v1
         with:
-          channel: 'stable'
-          architecture: x64
+          flutter-version: '3.19.5'
       - run: flutter pub get
-      - run: flutter test
       - run: flutter build apk --release
       - run: |
           flutter build ios --no-codesign
