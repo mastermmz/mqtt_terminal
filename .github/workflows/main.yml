@@ -1,13 +1,7 @@
 on:
-  pull_request:
-    branches:
-      - main
-      - master
-  push:
-    branches:
-      - main
-      - master
-      - develop
+  workflow_dispatch:
+
+
 name: "Build & Release"
 jobs:
   build:
