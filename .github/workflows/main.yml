@@ -35,6 +35,6 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           artifacts: "build/app/outputs/flutter-apk/app-release.apk,build/ios/iphoneos/app.ipa"
-          tag: v1.0.${{ github.run_number }}
+          tag: 1.0.2+2
           token: ${{ secrets.TOKEN }}
 
