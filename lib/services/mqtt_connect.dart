@@ -1,4 +1,3 @@
-
 import '../dataBase/data_model.dart';
 import '../widget/printer.dart';
 import 'package:mqtt_client/mqtt_client.dart';
@@ -20,6 +19,9 @@ class MqttBroker{
 
   Future<void> connestToBroker() async {
     String url = "${mqttBrokerData?.host}";
+    if(mqttBrokerData!.websocket){
+      url = "${mqttBrokerData!.hostType}$url";
+    }
     printer(url);
     clientMqtt = MqttServerClient(url, mqttBrokerData!.clientId);
     clientMqtt.onConnected = (){onConnectFun();printer("connect");subscribeMessage();};
@@ -28,9 +30,16 @@ class MqttBroker{
     clientMqtt.onAutoReconnect = (){onAutoReconnectFun();printer("sub: ");};
     clientMqtt.onAutoReconnected = (){onAutoReconnectedFun();printer("sub: ");};
     clientMqtt.port = mqttBrokerData!.port;
-    clientMqtt.secure = mqttBrokerData!.secure;
+    if(mqttBrokerData!.websocket){
+      clientMqtt.useWebSocket = mqttBrokerData!.websocket;
+      clientMqtt.secure = false;
+      printer("mqttBrokerData!.secure && mqttBrokerData!.websocket");
+    }else{
+      clientMqtt.secure = mqttBrokerData!.secure;
+      printer("mqttBrokehhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+    }
     clientMqtt.autoReconnect = mqttBrokerData!.autoReconnect;
-    clientMqtt.useWebSocket = mqttBrokerData!.websocket;
+    // clientMqtt.useWebSocket = mqttBrokerData!.websocket;
     clientMqtt.keepAlivePeriod = int.parse(mqttBrokerData!.keepAlive);
     if(mqttBrokerData!.mqttVersion == 0){
       clientMqtt.setProtocolV31();

@@ -34,9 +34,9 @@ Widget subscribMasseg(SubscribMassegClass subscribMasseg , context){
     width: 10,
     // height: 5,
     alignment:subscribMasseg.send == true? Alignment.centerRight: Alignment.centerLeft,
-    padding:  const EdgeInsets.symmetric(horizontal: 30 , vertical: 2.0),
+    padding:  const EdgeInsets.symmetric(horizontal: 10 , vertical: 2.0),
     // padding:  const EdgeInsets.only(left: 10),
-    margin: const EdgeInsets.symmetric(horizontal: 20 , vertical:2),
+    margin: const EdgeInsets.symmetric(horizontal: 10 , vertical:2),
     //
     // decoration: BoxDecoration(
     //   color: subscribMasseg.massegColor,

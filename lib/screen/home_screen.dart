@@ -16,9 +16,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late List <MqttBrokerData> mqttBroker;
+  late List<MqttBrokerData> mqttBroker;
   late Stream<List<MqttBrokerData>> streaDeviceList;
-
 
   @override
   void initState() {
@@ -26,7 +25,8 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
-  Future<void> deleteBroker({required context , required  MqttBrokerData mqttBrokerData}) async {
+  Future<void> deleteBroker(
+      {required context, required MqttBrokerData mqttBrokerData}) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -60,7 +60,8 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Future<void> longpressFun({required context , required MqttBrokerData mqttBrokerData}) async {
+  Future<void> longpressFun(
+      {required context, required MqttBrokerData mqttBrokerData}) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
@@ -72,7 +73,8 @@ class _HomePageState extends State<HomePage> {
               children: <Widget>[
                 TextButton(
                   style: TextButton.styleFrom(
-                    foregroundColor: Colors.black87, backgroundColor: const Color(0x90f2f4f6),
+                    foregroundColor: Colors.black87,
+                    backgroundColor: const Color(0x90f2f4f6),
                     minimumSize: const Size(88, 36),
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     shape: const RoundedRectangleBorder(
@@ -82,13 +84,15 @@ class _HomePageState extends State<HomePage> {
                   onPressed: () {
                     // objectbox.deletlDevice(device);
                     Navigator.of(context).pop();
-                    deleteBroker(context: context , mqttBrokerData: mqttBrokerData);
+                    deleteBroker(
+                        context: context, mqttBrokerData: mqttBrokerData);
                   },
                   child: const Text("delete Broker"),
                 ),
                 TextButton(
                   style: TextButton.styleFrom(
-                    foregroundColor: Colors.black87, backgroundColor: const Color(0x90f2f4f6),
+                    foregroundColor: Colors.black87,
+                    backgroundColor: const Color(0x90f2f4f6),
                     minimumSize: const Size(88, 36),
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     shape: const RoundedRectangleBorder(
@@ -97,8 +101,11 @@ class _HomePageState extends State<HomePage> {
                   ),
                   onPressed: () {
                     Navigator.of(context).pop();
-                    Navigator.push(context, MaterialPageRoute(builder: (context) {
-                      return EditBroker(mqttBrokerData: mqttBrokerData,);
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return EditBroker(
+                        mqttBrokerData: mqttBrokerData,
+                      );
                     }));
                   },
                   child: const Text("edit broker"),
@@ -123,64 +130,67 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text("MQTT Client"),
-          centerTitle: true,
-          actions: [
-            IconButton(onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context){
-                return const AddBroker();
-              }));
-            }, icon: const Icon(Icons.add))
-          ],
-        ),
-        body: StreamBuilder<List<MqttBrokerData>>(
-          stream:streaDeviceList,
-          builder: (context , snapshot){
-            if(!snapshot.hasData){
-              return const Center (
-                child: CircularProgressIndicator(),
-              );
-            }else{
-              mqttBroker = snapshot.data!;
-            }
-            printer("snapshot: ${snapshot.runtimeType}");
-            printer("snapshot.data: ${snapshot.data?.length}");
-
-            return GridView.count(
-
-              padding: const EdgeInsets.all(20.0),
-              mainAxisSpacing: 20.0,
-              crossAxisSpacing: 20.0,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              crossAxisCount: 2,
-              children: List.generate(mqttBroker.length, (index) {
-                MqttBrokerData mqttBrokerData = mqttBroker[index];
-                return brokerButtonList(
-                  iconPath: mqttBrokerData.iconPath,
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context){
-                        return BrokerMassegManneger(mqttBrokerData: mqttBrokerData,);
-                      }));
-                    },
-                    onLongPress: (){
-                      longpressFun(context: context , mqttBrokerData: mqttBrokerData);
-                    },
-                    host: "${mqttBrokerData.hostType}${mqttBrokerData.host}",
-                    name: mqttBrokerData.name,
-                    port: mqttBrokerData.port,
-                    username: mqttBrokerData.username
+          appBar: AppBar(
+            title: const Text("MQTT Client"),
+            centerTitle: true,
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return const AddBroker();
+                    }));
+                  },
+                  icon: const Icon(Icons.add))
+            ],
+          ),
+          body: StreamBuilder<List<MqttBrokerData>>(
+            stream: streaDeviceList,
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return const Center(
+                  child: CircularProgressIndicator(),
                 );
-              }),
-            );
-          },
-        )
-      ),
+              } else {
+                mqttBroker = snapshot.data!;
+              }
+              printer("snapshot: ${snapshot.runtimeType}");
+              printer("snapshot.data: ${snapshot.data?.length}");
+
+              return GridView.count(
+                padding: const EdgeInsets.all(20.0),
+                mainAxisSpacing: 20.0,
+                crossAxisSpacing: 20.0,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                crossAxisCount: 2,
+                children: List.generate(mqttBroker.length, (index) {
+                  MqttBrokerData mqttBrokerData = mqttBroker[index];
+                  return brokerButtonList(
+                      iconPath: mqttBrokerData.iconPath,
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return BrokerMassegManneger(
+                            mqttBrokerData: mqttBrokerData,
+                          );
+                        }));
+                      },
+                      onLongPress: () {
+                        longpressFun(
+                            context: context, mqttBrokerData: mqttBrokerData);
+                      },
+                      host: "${mqttBrokerData.hostType}${mqttBrokerData.host}",
+                      name: mqttBrokerData.name,
+                      port: mqttBrokerData.port,
+                      username: mqttBrokerData.username);
+                }),
+              );
+            },
+          )),
     );
   }
 }
-
 
 ///brokerButtonList(
 //                     onTap: (){

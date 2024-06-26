@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-Color fildColors = const Color(0xffdfdfdf);
-Color colorFildText =  const Color(0xff000000);
-
+import '../color_teme.dart';
 
 Widget textFildWidget({
   bool showPassword = false,
@@ -15,12 +13,11 @@ Widget textFildWidget({
   double inputMargin = 5.0,
   double inputPaddingL = 15.0,
   double inputPaddingR = 15.0,
-}){
+}) {
   return Container(
     margin: EdgeInsets.symmetric(vertical: inputMargin),
-    padding: EdgeInsets.only(left: inputPaddingL , right: inputPaddingR),
+    padding: EdgeInsets.only(left: inputPaddingL, right: inputPaddingR),
     child: TextField(
-
       obscureText: showPassword,
       maxLength: maxChar,
       keyboardType: textInputType,
@@ -28,15 +25,30 @@ Widget textFildWidget({
       style: textFildStyleWidget,
       decoration: InputDecoration(
         filled: true,
-        fillColor: fildColors,
-        // focusColor: Colors.red,
+
+        fillColor: focusColor,
+
+        focusColor: focusColor,
+
         border: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+          // gapPadding: 50.0,
+          borderSide: BorderSide(
+            width: 3,
+            color: Colors.grey,
+            strokeAlign: 20.0,
+          ),
+        ),
+
+        errorBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+          borderSide: BorderSide(width: 3, color: Colors.redAccent),
         ),
         errorText: errorTextShow,
+
         labelText: labelText,
         labelStyle: TextStyle(
+          fontSize: 10.0,
           color: colorFildText,
         ),
         // floatingLabelBehavior: FloatingLabelBehavior. ,
@@ -44,4 +56,3 @@ Widget textFildWidget({
     ),
   );
 }
-

@@ -1,4 +1,5 @@
 import 'package:animated_snack_bar/animated_snack_bar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -14,28 +15,28 @@ import '../widget/text_file_widget.dart';
 
 class BrokerMassegManneger extends StatefulWidget {
   const BrokerMassegManneger({super.key, required this.mqttBrokerData});
+
   final MqttBrokerData mqttBrokerData;
+
   @override
   State<BrokerMassegManneger> createState() => _BrokerMassegMannegerState();
 }
 
 class _BrokerMassegMannegerState extends State<BrokerMassegManneger> {
-
-  final TextEditingController _topicController   = TextEditingController();
-  final TextEditingController _massegController  = TextEditingController();
+  final TextEditingController _topicController = TextEditingController();
+  final TextEditingController _massegController = TextEditingController();
   bool loading = true;
   bool retain = false;
   final ScrollController _scrollController = ScrollController();
 
   final MqttBroker mqttBroker = MqttBroker();
 
-  List <SubscribMassegClass> subscribMassegList = [];
+  List<SubscribMassegClass> subscribMassegList = [];
   String topicsVersion = "QoS 0";
-
 
   List<String> topics = [];
 
-  void dataHandler(masseg , String topic, int topicsVersion){
+  void dataHandler(masseg, String topic, int topicsVersion) {
     SubscribMassegClass subscribMasseg = SubscribMassegClass();
     subscribMasseg.masseg = masseg;
     subscribMasseg.topic = topic;
@@ -43,24 +44,45 @@ class _BrokerMassegMannegerState extends State<BrokerMassegManneger> {
     subscribMasseg.topicsVersion = topicsVersion;
     printer(topicsVersion);
     subscribMassegList.add(subscribMasseg);
-    setState(() {
-
-    });
+    setState(() {});
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      _scrollController.animateTo(
-          _scrollController.position.maxScrollExtent,
+      _scrollController.animateTo(_scrollController.position.maxScrollExtent,
           duration: const Duration(milliseconds: 1),
           curve: Curves.fastOutSlowIn);
     });
   }
 
-  void mqttConfing(){
+  void mqttConfing() {
     printer(widget.mqttBrokerData.topic);
     mqttBroker.mqttBrokerData = widget.mqttBrokerData;
     mqttBroker.dataHandler = dataHandler;
-    mqttBroker.onConnectFun = (){loading = false;printer("ssss");snakbarShowModel(context: context , msg: "Connect" , );setState(() {});};
-    mqttBroker.onAutoReconnectedFun = (){loading = false;printer("ssss");snakbarShowModel(context: context , msg: "Connect" , );setState(() {});};
-    mqttBroker.onAutoReconnectFun = (){loading = true;printer("ssss");snakbarShowModel(context: context , msg: "Auto Reconnect" ,snakbarType: AnimatedSnackBarType.warning );setState(() {});};
+    mqttBroker.onConnectFun = () {
+      loading = false;
+      printer("ssss");
+      snakbarShowModel(
+        context: context,
+        msg: "Connect",
+      );
+      setState(() {});
+    };
+    mqttBroker.onAutoReconnectedFun = () {
+      loading = true;
+      printer("ssss");
+      snakbarShowModel(
+        context: context,
+        msg: "Connect",
+      );
+      setState(() {});
+    };
+    // mqttBroker.onAutoReconnectFun = () {
+    //   loading = true;
+    //   printer("ssss");
+    //   snakbarShowModel(
+    //       context: context,
+    //       msg: "Auto Reconnect",
+    //       snakbarType: AnimatedSnackBarType.warning);
+    //   setState(() {});
+    // };
     // mqttBroker.onDisconnectedFun = (){loading = true;printer("ssss");snakbarShowModel(context: context , msg: "Disconnected" ,snakbarType: AnimatedSnackBarType.error );setState(() {});};
     mqttBroker.connestToBroker();
   }
@@ -76,25 +98,26 @@ class _BrokerMassegMannegerState extends State<BrokerMassegManneger> {
     mqttBroker.unSubscribeMessage();
     mqttBroker.disconnetc();
     super.dispose();
-
   }
-
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(
-          appBar: AppBar(
-            // backgroundColor: Color(0xff848484),
-            title: Text(widget.mqttBrokerData.name , ),centerTitle: true,
+      child: Scaffold(
+        appBar: AppBar(
+          // backgroundColor: Color(0xff848484),
+          title: Text(
+            widget.mqttBrokerData.name,
           ),
-          body: _buildBoody(),
-        )
+          centerTitle: true,
+        ),
+        body: _buildBoody(),
+      ),
     );
   }
 
   Widget _buildBoody() {
-    if (loading){
+    if (loading) {
       return const LoadingWidget();
     }
     return Column(
@@ -110,29 +133,49 @@ class _BrokerMassegMannegerState extends State<BrokerMassegManneger> {
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
               itemCount: subscribMassegList.length,
-              itemBuilder:(BuildContext context, int index){
-                SubscribMassegClass subscribMassegData = subscribMassegList[index];
+              itemBuilder: (BuildContext context, int index) {
+                SubscribMassegClass subscribMassegData =
+                    subscribMassegList[index];
                 printer(subscribMassegData);
                 return GestureDetector(
                     onLongPress: () async {
-                      await Clipboard.setData(ClipboardData(text: "${subscribMassegData.topic!} : \n${subscribMassegData.masseg!}"));
-                      setState(() {
-
-                      });
+                      await Clipboard.setData(ClipboardData(
+                          text:
+                              "${subscribMassegData.topic!} : \n${subscribMassegData.masseg!}"));
+                      setState(() {});
                     },
-                      child: subscribMasseg(subscribMassegData ,context));
-              }
-          ),
+                    child: subscribMasseg(subscribMassegData, context));
+              },),
         ),
         Row(
           children: [
             Expanded(
-                child: textFildWidget(
-                  inputPaddingR: 8,
-                  labelText: "topic to send masseg:",
-                  textFildStyleWidget: Theme.of(context).textTheme.bodyLarge,
-                  controller: _topicController,
-                ),
+              flex: 4,
+              child: textFildWidget(
+                inputPaddingR: 8,
+
+                labelText: "topic to send masseg:",
+                textFildStyleWidget: Theme.of(context).textTheme.bodyLarge,
+                controller: _topicController,
+              ),
+            ),
+
+            Expanded(
+              flex: 2,
+              child: Container(
+                margin: const EdgeInsets.only(right: 10.0),
+                child: dropDownmodel(
+                    // width: 70,
+                    // fontSize: 8,
+                    libelText: "MQTT Topic Version:",
+                    items: mqttTopicVersionList,
+                    onChengFun: (String? value) {
+                      setState(() {
+                        topicsVersion = value!;
+                      });
+                    },
+                    selectedValues: topicsVersion),
+              ),
             ),
             const Text("retain:"),
             Checkbox(
@@ -144,26 +187,8 @@ class _BrokerMassegMannegerState extends State<BrokerMassegManneger> {
                 });
               },
             ),
-            Container(
-              margin: const EdgeInsets.only(right: 10.0),
-              child: dropDownmodel(
-
-                  width: 70,
-                  fontSize: 8,
-                  libelText: "MQTT Topic Version:",
-                  items: mqttTopicVersionList,
-                  onChengFun: (String? value){
-                    setState(() {
-                      topicsVersion = value!;
-                    });
-                  },
-                  selectedValues: topicsVersion
-              ),
-            ),
           ],
-
         ),
-
         Row(
           children: [
             Expanded(
@@ -176,10 +201,11 @@ class _BrokerMassegMannegerState extends State<BrokerMassegManneger> {
             Container(
               padding: const EdgeInsets.only(right: 15.0),
               child: GestureDetector(
-                onTap: (){
-                  if(_topicController.text != "" && _massegController.text != ""){
+                onTap: () {
+                  if (_topicController.text != "" &&
+                      _massegController.text != "") {
                     int topicVersion = 0;
-                    switch (topicsVersion){
+                    switch (topicsVersion) {
                       case "QoS 0":
                         topicVersion = 0;
                         break;
@@ -200,23 +226,28 @@ class _BrokerMassegMannegerState extends State<BrokerMassegManneger> {
                     subscribMasseg.topicsVersion = topicVersion;
 
                     subscribMassegList.add(subscribMasseg);
-                    mqttBroker.publishMessage(message: _massegController.text, topic: _topicController.text , inputTopicVersion: topicsVersion , retain: retain);
+                    mqttBroker.publishMessage(
+                        message: _massegController.text,
+                        topic: _topicController.text,
+                        inputTopicVersion: topicsVersion,
+                        retain: retain);
                     _massegController.text = "";
-                    setState(() {
-
+                    setState(() {});
+                    SchedulerBinding.instance.addPostFrameCallback((_) {
+                      _scrollController.animateTo(_scrollController.position.maxScrollExtent,
+                          duration: const Duration(milliseconds: 1),
+                          curve: Curves.fastOutSlowIn);
                     });
                   }
-
                 },
                 child: const CircleAvatar(
                   backgroundColor: Color(0xff0177FC),
-                  child: Icon(Icons.send , color: Colors.white),
+                  child: Icon(Icons.send, color: Colors.white),
                 ),
               ),
             ),
           ],
         )
-
       ],
     );
   }

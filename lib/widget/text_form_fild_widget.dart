@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-Color fildColors = const Color(0xffdfdfdf);
-Color colorFildText =  const Color(0xff000000);
-
+import '../color_teme.dart';
 
 Widget textForFildWidget({
   bool showPassword = false,
@@ -16,13 +14,13 @@ Widget textForFildWidget({
   double inputPaddingL = 15.0,
   double inputPaddingR = 15.0,
   String? Function(String?)? validator,
-}){
+}) {
   return Container(
     margin: EdgeInsets.symmetric(vertical: inputMargin),
-    padding: EdgeInsets.only(left: inputPaddingL , right: inputPaddingR),
+    padding: EdgeInsets.only(left: inputPaddingL, right: inputPaddingR),
     child: TextFormField(
-      validator: validator,
 
+      validator: validator,
       obscureText: showPassword,
       maxLength: maxChar,
       keyboardType: textInputType,
@@ -30,13 +28,27 @@ Widget textForFildWidget({
       style: textFildStyleWidget,
       decoration: InputDecoration(
         filled: true,
-        fillColor: fildColors,
-        // focusColor: Colors.red,
+
+        fillColor: focusColor,
+
+        focusColor: focusColor,
+
         border: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+          // gapPadding: 50.0,
+          borderSide: BorderSide(
+            width: 3,
+            color: Colors.grey,
+            strokeAlign: 20.0,
+          ),
+        ),
+
+        errorBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+          borderSide: BorderSide(width: 3, color: Colors.redAccent),
         ),
         errorText: errorTextShow,
+
         labelText: labelText,
         labelStyle: TextStyle(
           color: colorFildText,
@@ -46,4 +58,3 @@ Widget textForFildWidget({
     ),
   );
 }
-

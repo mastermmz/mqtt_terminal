@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mqtt_terminal/screen/add_broker.dart';
 import 'package:mqtt_terminal/screen/home_screen.dart';
 import 'dataBase/data_base_maneger.dart';
 
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         primaryColor: Colors.blueGrey,
         scaffoldBackgroundColor: const Color(0xffeeeeee),
-        appBarTheme: const AppBarTheme(color: Color(0xff848484))
+        appBarTheme: const AppBarTheme(color: Color(0xffeeeeee))
       ),
       // home: const AddBroker(),
       home: const HomePage(),
